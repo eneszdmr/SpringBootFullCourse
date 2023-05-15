@@ -21,14 +21,39 @@ public class CruddemoApplication {
     public CommandLineRunner commandLineRunner(StudentDAO dao) {
         return runner -> {
             //createStudent(dao);
-            //createMultipleStudents(dao);
-            //readTheStudent(dao);
+           createMultipleStudents(dao);
+            // readTheStudent(dao);
             //listStudent(dao);
             //getFirstName(dao);
-            updateTheStu(dao);
+            //updateTheStu(dao);
+
+         //   deleteStudent(dao);
+
+           // sayiTekmi(1561464);
+
         };
 
 
+    }
+
+    private void sayiTekmi(int sayi) {
+        if((sayi % 2 )== 0){
+            System.out.println("Sayı çift");
+        }else
+        System.out.println("sayı tek");
+    }
+
+    private void deleteStudent(StudentDAO dao) throws InterruptedException {
+
+        int studentId = 1;
+        System.out.println("we want to delete the student id : " + studentId);
+        System.out.println("all students here : .....");
+        listStudent(dao);
+        Thread.sleep(3000);
+        dao.delete(studentId);
+        System.out.println("deleted " + studentId);
+        Thread.sleep(2000);
+        listStudent(dao);
     }
 
     private void updateTheStu(StudentDAO dao) throws InterruptedException {
@@ -44,12 +69,12 @@ public class CruddemoApplication {
         System.out.println("Student searching.........");
         Thread.sleep(3000);
         System.out.println("Yeppp found it !");
-        System.out.println("the student is : "+foundStudent);
+        System.out.println("the student is : " + foundStudent);
         Thread.sleep(2000);
         foundStudent.setFirstName("ali updated");
         dao.update(foundStudent);
         Thread.sleep(3000);
-        System.out.println("new firstname is : "+foundStudent.getFirstName());
+        System.out.println("new firstname is : " + foundStudent.getFirstName());
         Thread.sleep(3000);
         System.out.println(foundStudent);
 
@@ -78,13 +103,13 @@ public class CruddemoApplication {
     }
 
     private void createMultipleStudents(StudentDAO dao) {
-        Student student = new Student("ahmet", "can", "ahmetcan@gmail.com");
+        Student student = new Student("emre ", "kednirci", "ahmetcan@gmail.com");
         dao.save(student);
 
-        Student student1 = new Student("ayşe", "tan", "aysetan@gmail.com");
+        Student student1 = new Student("onur", "fikret", "aysetan@gmail.com");
         dao.save(student1);
 
-        Student student2 = new Student("fatma", "zan", "fatmaan@gmail.com");
+        Student student2 = new Student("mücaahit", "nezdil", "fatmaan@gmail.com");
         dao.save(student2);
     }
 

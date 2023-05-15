@@ -31,8 +31,12 @@ public class CruddemoApplication {
 	}
 
 	private void getFirstName(StudentDAO dao){
-		Student b=dao.findByFirstName("zan");
-		System.out.println(b);
+		List<Student> findStudent=dao.findByFirstName("fatma");
+
+		for (Student stu : findStudent){
+			System.out.println(stu);
+		}
+
 	}
 
 	private void listStudent(StudentDAO dao){

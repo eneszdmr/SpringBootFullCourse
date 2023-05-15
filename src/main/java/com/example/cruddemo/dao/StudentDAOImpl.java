@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class StudentDAOImpl implements StudentDAO{
+public class StudentDAOImpl implements StudentDAO {
 
     private EntityManager entityManager;
 
@@ -22,24 +22,30 @@ public class StudentDAOImpl implements StudentDAO{
     @Override
     @Transactional
     public void save(Student student) {
-    entityManager.persist(student);
+        entityManager.persist(student);
     }
 
     @Override
     public Student findById(int id) {
-        return entityManager.find(Student.class,id);
+        return entityManager.find(Student.class, id);
     }
 
     @Override
     public List<Student> findAll() {
-        TypedQuery<Student> query=entityManager.createQuery("From Student order by lastName",Student.class);
+        TypedQuery<Student> query = entityManager.createQuery("From Student order by lastName", Student.class);
         return query.getResultList();
     }
 
     @Override
-    public Student findByFirstName(String lastname) {
-        Student newStu = entityManager.createQuery("From Student", Student.class).getSingleResult();
-        return newStu;
+    public List<Student> findByFirstName(String firstName) {
+        //böyle de olur
+        //    TypedQuery<Student> liststu = entityManager.createQuery("From Student where firstName='"+firstName+"'", Student.class);
+
+        TypedQuery<Student> findFirstName = entityManager.createQuery("From Student where firstName=:theData", Student.class);
+        findFirstName.setParameter("theData", firstName);
+
+
+        return findFirstName.getResultList();
     }
 
 
